@@ -20,3 +20,5 @@ capsules_paths = {
         'archive_error_path': r'T:\Users\yaniv\Dropbox\Dropbox\Limor_Laptop\capsula\Archive_Error',
     },
 }
+
+FILE_NAME_PARTS = 7

@@ -4,7 +4,7 @@ import settings
 
 def create_list_full_path_file(list_files, source_path):
     '''
-
+    Create a list of the files to be processed (moved to destination)
     :param source_path: source path with files after unzip
     :return: list with files full path
     '''
@@ -16,7 +16,7 @@ def create_list_full_path_file(list_files, source_path):
 
 def parse_file_name(split_file_name):
     '''
-
+    parse the file name
     :param split_file_name: list with data from file name
     :return: tuple (kod_moh_alfa, file_name_year, file_name_month, file_name_day)
     '''
@@ -29,15 +29,6 @@ def parse_file_name(split_file_name):
     file_name_day = file_name_date[6:8]
     return kod_moh_alfa, file_name_year, file_name_month, file_name_day
 
-
-def split_name_file(file_name):
-    '''
-
-    :param file_name: string file name
-    :return: list after split
-    '''
-    list_file_name = file_name.split('_')
-    return list_file_name
 
 # def move_file(source, dest, message):
 #     try:
@@ -52,13 +43,12 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
 
     for file_full_path in list_files:
         file_name = os.path.basename(file_full_path)
-        split_file_name = split_name_file(file_name)
-        if len(split_file_name) == 7:
-            kod_moh_alfa, file_name_year, file_name_month, file_name_day = parse_file_name(split_file_name)
-
+        file_name_parts = file_name.split('_')
+        if len(file_name_parts) == settings.FILE_NAME_PARTS:
+            kod_moh_alfa, file_name_year, file_name_month, file_name_day = parse_file_name(file_name_parts)
             dest_location = os.path.join(dest_path, kod_moh_alfa, file_name_year, file_name_month, file_name_day)
 
-            '''create folders if not exist'''
+            # create folders if not exist
             if not os.path.exists(dest_location):
                 try:
                     os.makedirs(dest_location)
@@ -68,7 +58,7 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
 
             if os.path.isfile(os.path.join(dest_location, file_name)):
                 try:
-                    print("The file_name {} olready exsist in the path {}. the file going move to {}".format(file_name,
+                    print("The file name {} olready exist in the path {} the file will be moved to {}".format(file_name,
                                                                                              dest_location,
                                                                                              archive_duplicates_path))
                     shutil.move(file_full_path, archive_duplicates_path)
@@ -88,7 +78,7 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
             except shutil.Error:
                 print("There is a problem moving the file {} to the archive error path. {}.".format(file_full_path,
                                                                                                     archive_error_path))
-            continue
+            # continue
 
 
 if __name__ == '__main__':
