@@ -57,10 +57,10 @@ def parse_file_name(file_name_parts):
 
 
 def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
-    list_files = list()
-    list_files = create_list_full_path_file(list_files, source_path)
+    files_to_process = list()
+    files_to_process = create_list_full_path_file(files_to_process, source_path)
 
-    for file_full_path in list_files:
+    for file_full_path in files_to_process:
         file_name = os.path.basename(file_full_path)
         file_name_parts = file_name.split('_')
         if len(file_name_parts) == settings.FILE_NAME_PARTS:
