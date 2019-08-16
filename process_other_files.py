@@ -54,14 +54,14 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
                 try:
                     os.makedirs(dest_location)
                 except OSError as ex:
-                    print("There is a problem creating folders. Error! {}".format(ex))
-                    raise Exception("There is a problem creating folders. Error! {}".format(ex))
+                    print(settings.error_messages['folder_creation_error'].format(ex))
+                    raise Exception(settings.error_messages['folder_creation_error'].format(ex))
 
             if os.path.isfile(os.path.join(dest_location, file_name)):
                 try:
-                    print("The file name {} already exist in the path {} the file will be moved to {}".format(file_name,
-                                                                                             dest_location,
-                                                                                             archive_duplicates_path))
+                    print(settings.error_messages['existing_file'].format(file_name,
+                                                                     dest_location,
+                                                                     archive_duplicates_path))
                     shutil.move(file_full_path, archive_duplicates_path)
                 except shutil.Error:
                     print("There is a problem moving the file to the destination. {} status code 30.".format(
@@ -73,7 +73,7 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
                     print("There is a problem moving the file to the destination. {} status code 30.".format(
                                                                                                         file_full_path))
         else:
-            print("Invalid file name: {} status code 40.".format(file_name))
+            print(settings.error_messages['error_files'].format(file_name))
             try:
                 shutil.move(file_full_path, archive_error_path)
             except shutil.Error:

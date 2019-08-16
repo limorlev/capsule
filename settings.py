@@ -22,3 +22,9 @@ capsules_paths = {
 FILE_NAME_PARTS = 7
 CONFIGURATION_FILE = r'c:\user\conf.json'
 DEFAULT_ENVIRONMENT = 'home'
+
+error_messages = {
+    'existing_file': 'The file name {} already exist in the path {} the file will be moved to {}',
+    'error_files': 'Invalid file name: {} status code 40.',
+    'folder_creation_error': 'There is a problem creating folders. Error! {}',
+}
