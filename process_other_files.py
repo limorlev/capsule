@@ -1,6 +1,8 @@
 import os
 import shutil
 import settings
+from AppContext import AppContext
+
 
 def create_list_full_path_file(list_files, source_path):
     '''
@@ -75,7 +77,7 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
 
             if os.path.isfile(os.path.join(dest_location, file_name)):
                 try:
-                    print("The file name {} olready exist in the path {} the file will be moved to {}".format(file_name,
+                    print("The file name {} already exist in the path {} the file will be moved to {}".format(file_name,
                                                                                              dest_location,
                                                                                              archive_duplicates_path))
                     shutil.move(file_full_path, archive_duplicates_path)
@@ -99,7 +101,9 @@ def main(source_path, dest_path, archive_duplicates_path, archive_error_path):
 
 
 if __name__ == '__main__':
-    main(settings.capsules_paths[settings.current_env]['source_path'],
-         settings.capsules_paths[settings.current_env]['dest_path'],
-         settings.capsules_paths[settings.current_env]['archive_duplicates_path'],
-         settings.capsules_paths[settings.current_env]['archive_error_path'])
+    app_context = AppContext()
+    env = app_context.get_environment()
+    main(settings.capsules_paths[env]['source_path'],
+         settings.capsules_paths[env]['dest_path'],
+         settings.capsules_paths[env]['archive_duplicates_path'],
+         settings.capsules_paths[env]['archive_error_path'])
