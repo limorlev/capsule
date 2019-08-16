@@ -20,3 +20,5 @@ capsules_paths = {
 }
 
 FILE_NAME_PARTS = 7
+CONFIGURATION_FILE = r'c:\user\conf.json'
+DEFAULT_ENVIRONMENT = 'home'
