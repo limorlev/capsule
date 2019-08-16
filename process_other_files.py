@@ -14,19 +14,36 @@ def create_list_full_path_file(list_files, source_path):
     return list_files
 
 
-def parse_file_name(split_file_name):
+def file_name_exceptions(kod_moh_alfa, file_name_year, file_name_month, file_name_day):
+    '''
+    fix file parts content from design errors
+    :param kod_moh_alfa:
+    :param file_name_year:
+    :param file_name_month:
+    :param file_name_day:
+    :return: fixed values
+    '''
+    if kod_moh_alfa == '11108':
+        kod_moh_alfa = '11109'
+
+    return kod_moh_alfa, file_name_year, file_name_month, file_name_day
+
+
+def parse_file_name(file_name_parts):
     '''
     parse the file name
     :param split_file_name: list with data from file name
-    :return: tuple (kod_moh_alfa, file_name_year, file_name_month, file_name_day)
+    :return: the folders names for the processed file
     '''
-    kod_moh_alfa = split_file_name[3]
-    if kod_moh_alfa == '11108':
-        kod_moh_alfa = '11109'
-    file_name_date = split_file_name[4][:8]
+    kod_moh_alfa = file_name_parts[3]
+    file_name_date = file_name_parts[4][:8]
     file_name_year = file_name_date[:4]
     file_name_month = file_name_date[4:6]
     file_name_day = file_name_date[6:8]
+    kod_moh_alfa, file_name_year, file_name_month, file_name_day = file_name_exceptions(kod_moh_alfa,
+                                                                                        file_name_year,
+                                                                                        file_name_month,
+                                                                                        file_name_day)
     return kod_moh_alfa, file_name_year, file_name_month, file_name_day
 
 
