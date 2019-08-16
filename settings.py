@@ -1,5 +1,3 @@
-current_env = 'home'
-
 capsules_paths = {
     'prod': {
         'source_path': r'\\clalit\dfs$\Integration\Capsula',
