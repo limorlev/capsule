@@ -5,11 +5,6 @@ from AppContext import AppContext
 
 
 def create_list_full_path_file(list_files, source_path):
-    '''
-    Create a list of the files to be processed (moved to destination)
-    :param source_path: source path with files after unzip
-    :return: list with files full path
-    '''
     for path, dir_list, file_list in os.walk(source_path):
         for file_name in file_list:
             list_files.append(os.path.join(path, file_name))
@@ -17,14 +12,6 @@ def create_list_full_path_file(list_files, source_path):
 
 
 def file_name_exceptions(kod_moh_alfa, file_name_year, file_name_month, file_name_day):
-    '''
-    fix file parts content from design errors
-    :param kod_moh_alfa:
-    :param file_name_year:
-    :param file_name_month:
-    :param file_name_day:
-    :return: fixed values
-    '''
     if kod_moh_alfa == '11108':
         kod_moh_alfa = '11109'
 
@@ -32,11 +19,6 @@ def file_name_exceptions(kod_moh_alfa, file_name_year, file_name_month, file_nam
 
 
 def parse_file_name(file_name_parts):
-    '''
-    parse the file name
-    :param split_file_name: list with data from file name
-    :return: the folders names for the processed file
-    '''
     kod_moh_alfa = file_name_parts[3]
     file_name_date = file_name_parts[4][:8]
     file_name_year = file_name_date[:4]
