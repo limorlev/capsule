@@ -2,6 +2,7 @@ import os
 import shutil
 import settings
 from AppContext import AppContext
+import os
 
 
 def create_list_full_path_file(list_files, source_path):
@@ -89,3 +90,5 @@ if __name__ == '__main__':
          settings.capsules_paths[env]['dest_path'],
          settings.capsules_paths[env]['archive_duplicates_path'],
          settings.capsules_paths[env]['archive_error_path'])
+
+
